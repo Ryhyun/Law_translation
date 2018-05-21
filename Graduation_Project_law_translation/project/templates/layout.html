@@ -1,0 +1,13 @@
+<!doctype html>
+<a style="text-align:center" href="{{ url_for('start') }}">Home</a>
+<a style="text-align:center" href="http://boosttech.in">About</a>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+<div class=page>
+  <h1>Law Translation</h1>
+
+
+  {% block body %}
+    {% endblock %}
+
+</div>
