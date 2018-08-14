@@ -21,8 +21,8 @@ def civil():
 
     output = analyzeText(input)
     cluster = analizeCluster(output)
-    print( output)
-    print( cluster)
+    #print( output)
+    #print( cluster)
 
     result = []
     detail = ['법인, 비법인', '소송 관련', '가족관계', '부동산 계약', '부동산 계약',
