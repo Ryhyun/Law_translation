@@ -40,13 +40,19 @@ def civil():
     totalC = len( cluster)
     tempArr = [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     for i in range( totalC):
-        tempArr[ int(cluster[i])] += 1
+        if (cluster[i] != '학습 중 입니다'):
+            tempArr[ int(cluster[i])] += 1
     strResult = '    "' + str(input) + '" 분석하면   '
+    cnt = 0
     for i in range(20):
         if( tempArr[i] != 0 ):
+            cnt += tempArr[i]
             strResult = strResult + " "+ detail[i]+"일 확률:" + str(float("{:.2f}".format(tempArr[i] / totalC))) + "% "
 
     strResult += " 입니다 ^^ "
+    if cnt == 0 :
+        strResult = '    "' + str(input) + '" 학습 중 입니다~'
+
     cate, name1, name2, name3 = dataStructure();
 
     return render_template('index.html',chk = 1, input = input, result= result , cate = cate, name1= name1 , name2 = name2 , name3 = name3, strResult= strResult )
