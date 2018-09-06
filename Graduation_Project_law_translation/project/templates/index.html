@@ -1,5 +1,44 @@
 {% extends "layout.html" %}
 {% block body %}
+<style>
+  .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+        /* The Close Button */
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+</style>
+
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:700px;">
@@ -9,66 +48,130 @@
       <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'copyright');"><i class="fa fa-car w3-margin-right"></i>특허법</button>
     </div>
 
-    <!-- Tabs -->
+    <!-- 민법 -->
     <div id="civil" class="w3-container w3-white w3-padding-16 myLink">
       <h3> 민법 </h3>
       <h3>  필요한 조문을 검색해 줍니다 </h3>
         <form method ="POST", action="/civil" >
       <div class="w3-row-padding" style="margin:0 -16px;">
-        <div class="w3-half">
-          <label>From</label>
 
-            <textarea class="w3-input w3-border" type="text"  name="civil_input" cols="40" rows="8"  placeholder="상황을 입력해주세요.">
-                {{input}}
-            </textarea>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="civil_input" placeholder="상황을 입력해주세요." aria-label="상황을 입력해주세요."">
+          <div class="input-group-append">
+            <button class="btn-outline-secondary" type ="submit">Search</button>
+          </div>
         </div>
-        <div class="w3-half">
-          <label>To</label>
-        <textarea class="w3-input w3-border"  cols="40" rows="8"  type="text" placeholder="조문이 검색됩니다." >
-            {% for temp in result %}{{temp['output']}} - {{temp['cluster']}} - {{temp['detail']}}
-            {% endfor %}
-        </textarea>
 
-        </div>
       </div>
-      <p><button type ="submit" class="w3-button w3-dark-grey">Search</button></p>
         </form>
     </div>
 
-    <div id="real_estate" class="w3-container w3-white w3-padding-16 myLink">
-      <h3> 부동산법 </h3>
-      <h3> 필요한 조문을 검색해 줍니다 </h3>
+    <!-- 부동산 법 -->
+  <div id="real_estate" class="w3-container w3-white w3-padding-16 myLink">
+     <h3> 부동산법 </h3>
+      <h3>  필요한 조문을 검색해 줍니다 </h3>
+        <form method ="POST", action="/civil" >
       <div class="w3-row-padding" style="margin:0 -16px;">
-        <div class="w3-half">
-          <label>From</label>
-          <input class="w3-input w3-border" type="text" placeholder="상활을 입력해주세요.">
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="civil_input" placeholder="상황을 입력해주세요." aria-label="상황을 입력해주세요."">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary trigger" type ="submit">Search</button>
+          </div>
         </div>
-        <div class="w3-half">
-          <label>To</label>
-          <input class="w3-input w3-border" type="text" placeholder="조문이 검색됩니다.">
-        </div>
+
       </div>
-      <p><button class="w3-button w3-dark-grey">Search</button></p>
+        </form>
     </div>
 
+    <!-- 특허법 -->
   <div id="copyright" class="w3-container w3-white w3-padding-16 myLink">
     <h3> 특허법 </h3>
-    <h3> 필요한 조문을 검색해 줍니다</h3>
+      <h3>  필요한 조문을 검색해 줍니다 </h3>
+        <form method ="POST", action="/civil" >
       <div class="w3-row-padding" style="margin:0 -16px;">
-        <div class="w3-half">
-          <label>From</label>
-          <input class="w3-input w3-border" type="text" placeholder="상황을 입력해주세요.">
-        </div>
-        <div class="w3-half">
-          <label>To</label>
-          <input class="w3-input w3-border" type="text" placeholder="조문이 검색됩니다.">
-        </div>
-      </div>
-      <p><button class="w3-button w3-dark-grey">Search</button></p>
 
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="civil_input" placeholder="상황을 입력해주세요." aria-label="상황을 입력해주세요."">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary trigger" type ="submit">Search</button>
+          </div>
+        </div>
+
+      </div>
+        </form>
   </div>
 
+  <!-- 모달 -->
+  {% if chk == 1 %}
+    <div id="modal" class="modal" style= "display : block">
+        <div class="modal-content">
 
+            <span class="close-button">&times;</span>
+
+          <p> {{ strResult}} </p>
+          <table class="table table-sm">
+            <thead>
+            </thead>
+            <tbody>
+              {% set n2 = [0] %}
+              {% set n3 = [0] %}
+              {% set tempn1 = 0 %}
+              {% set tempn2 = 0 %}
+              {% set tempn3 = 0 %}
+              {% set tempn4 = 0 %}
+              {% for i in range( name1| length )%}
+              <ul>
+
+                <li class = "list-group-item list-group-item-action active"> {{ name1[ loop.index -1 ] }}</li>
+                  {% set tempn1 = loop.index -1  %}
+
+
+
+
+                  {% for j in range( cate[ tempn1 ]| length )%}
+                  <ul class="cate2" onclick = "ca2( {{ n2[0] }})" >
+
+                    <li class="list-group-item">    {{ name2[   n2[0] ] }}</li>
+                      {% if n2.append(n2.pop() + 1) %}{% endif %}
+                      {% set tempn2 = loop.index -1  %}
+
+
+                      {% for k in range( cate[tempn1][  tempn2]| length )%}
+                          {% set tempn3 = loop.index -1  %}
+                      <ul class = "c2{{n2[0] -1}}" style= "display : none" onclick="ca3({{n3[0]}}, event)">
+                          <li class="list-group-item ">    {{ name3[   n3[0] ] }}</li>
+
+                              {% if n3.append(n3.pop() + 1) %}{% endif %}
+
+                              {% for l in range( cate[tempn1][tempn2][  tempn3]| length )%}
+                                  {% set tempn4 = loop.index -1  %}
+                                  <ul class = "c3{{n3[0] -1}}" style= "display : none" >
+                                      {% for m in range( cate[tempn1][tempn2][tempn3][  tempn4]| length )%}
+                                          <li class="list-group-item list-group-item-danger">    {{cate[tempn1][tempn2][tempn3][tempn4][  loop.index -1 ] }} </li>
+                                      {% endfor %}
+                                  </ul>
+                              {% endfor %}
+                          </li>
+                      </ul>
+                      {% endfor %}
+
+
+
+                  </ul>
+                  {% endfor %}
+
+              </ul>
+
+              {% endfor %}
+            </tbody>
+
+          </table>
+
+
+        </div>
+    </div>
+  {% endif %}
 
     <!-- Image -->
   <div class="w3-row-padding w3-text-white w3-large">
@@ -96,8 +199,6 @@
       </div>
     </div>
   </div>
-
-
 
   <!-- Newsletter -->
   <div class="w3-container">
@@ -127,4 +228,7 @@
 
 <!-- End page content -->
 </div>
+
+
+
 {% endblock %}

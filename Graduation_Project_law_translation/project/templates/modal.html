@@ -1,0 +1,109 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<!-- Latest compiled JavaScript -->
+
+
+<table class="table table-sm">
+  <thead>
+  </thead>
+  <tbody>
+    {% set n2 = [0] %}
+    {% set n3 = [0] %}
+    {% set tempn1 = 0 %}
+    {% set tempn2 = 0 %}
+    {% set tempn3 = 0 %}
+    {% set tempn4 = 0 %}
+    {% for i in range( name1| length )%}
+    <ul>
+
+      <li class = "list-group-item list-group-item-action active"> {{ name1[ loop.index -1 ] }}</li>
+        {% set tempn1 = loop.index -1  %}
+
+
+
+
+        {% for j in range( cate[ tempn1 ]| length )%}
+        <ul class="cate2" onclick = "ca2( {{ n2[0] }})" >
+
+          <li class="list-group-item">    {{ name2[   n2[0] ] }}</li>
+            {% if n2.append(n2.pop() + 1) %}{% endif %}
+            {% set tempn2 = loop.index -1  %}
+
+
+            {% for k in range( cate[tempn1][  tempn2]| length )%}
+                {% set tempn3 = loop.index -1  %}
+            <ul class = "c2{{n2[0] -1}}" style= "display : none" onclick="ca3({{n3[0]}}, event)">
+                <li class="list-group-item ">    {{ name3[   n3[0] ] }}</li>
+
+                    {% if n3.append(n3.pop() + 1) %}{% endif %}
+
+                    {% for l in range( cate[tempn1][tempn2][  tempn3]| length )%}
+                        {% set tempn4 = loop.index -1  %}
+                        <ul class = "c3{{n3[0] -1}}" style= "display : none" >
+                            {% for m in range( cate[tempn1][tempn2][tempn3][  tempn4]| length )%}
+                                <li class="list-group-item list-group-item-danger">    {{cate[tempn1][tempn2][tempn3][tempn4][  loop.index -1 ] }} </li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </li>
+            </ul>
+            {% endfor %}
+
+
+
+        </ul>
+        {% endfor %}
+
+    </ul>
+
+    {% endfor %}
+  </tbody>
+
+</table>
+
+<script>
+
+
+
+    function ca2(id){
+        console.log("ca2-"+ id) ;
+        var e= document.getElementsByClassName("c2"+id);
+
+        console.log( e[0]);
+        if(e[0].style.display == "block")
+            for (i = 0; i < e.length; i++) {
+                e[i].style.display = "none";
+            }
+
+        else
+            for (i = 0; i < e.length; i++) {
+                e[i].style.display = "block";
+            }
+
+    }
+    function ca3(id,event){
+        console.log("ca3-"+ id) ;
+        var e= document.getElementsByClassName("c3"+id);
+
+        console.log( e[0]);
+        if(e[0].style.display == "block")
+            for (i = 0; i < e.length; i++) {
+                e[i].style.display = "none";
+            }
+
+        else
+            for (i = 0; i < e.length; i++) {
+                e[i].style.display = "block";
+            }
+        event.stopPropagation();
+    }
+
+</script>
