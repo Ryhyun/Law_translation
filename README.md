@@ -1,7 +1,7 @@
 # Law_translation
 
 
-http://52.79.208.206:5000/
+law-searcher.com
 
 
 
