@@ -47,7 +47,7 @@ def civil():
     for i in range(20):
         if( tempArr[i] != 0 ):
             cnt += tempArr[i]
-            strResult = strResult + " "+ detail[i]+"일 확률:" + str(float("{:.2f}".format(tempArr[i] / totalC))) + "% "
+            strResult = strResult + " "+ detail[i]+"일 확률:" + str(float("{:.2f}".format(tempArr[i] / totalC))* 100 ) + "% "
 
     strResult += " 입니다 ^^ "
     if cnt == 0 :
