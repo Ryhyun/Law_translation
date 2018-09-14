@@ -15,13 +15,13 @@
         }
 
         /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto; /* 15% from the top and centered */
-            padding: 10px;
-            border: 1px solid #888;
-            width: 95%; /* Could be more or less, depending on screen size */
-        }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 10px;
+        border: 1px solid #888;
+        width: 90%; /* Could be more or less, depending on screen size */
+    }
         /* The Close Button */
         .close-button {
             color: #aaa;
@@ -110,6 +110,7 @@
             <span class="close-button">&times;</span>
 
           <p> {{ strResult}} </p>
+          <p style ="font-size: 35px; "> {{ aResult }} </p>
           <table class="table table-sm">
             <thead>
             </thead>
@@ -139,8 +140,20 @@
 
                       {% for k in range( cate[tempn1][  tempn2]| length )%}
                           {% set tempn3 = loop.index -1  %}
-                      <ul class = "c2{{n2[0] -1}}" style= "display : none" onclick="ca3({{n3[0]}}, event)">
-                          <li class="list-group-item ">    {{ name3[   n3[0] ] }}</li>
+                      <ul class = "c2{{n2[0] -1}}" style= "display : block" onclick="ca3({{n3[0]}}, event)">
+                        {% if julC[ n3[0]] == 0 %}
+                          <li class="list-group-item list-group-item-primary">   {{ name3[   n3[0] ] }}</li>
+
+                        {% elif julC[ n3[0]] == 1 %}
+                          <li class="list-group-item list-group-item-danger">   {{ name3[   n3[0] ] }}</li>
+
+                        {% elif julC[ n3[0]] > 1 %}
+                          <li class="list-group-item list-group-item-success">   {{ name3[   n3[0] ] }}</li>
+                        {% endif %}
+
+                        {% if julC[ n3[0]] == -1 %}
+                          <li class="list-group-item" style= "display : block">    {{ name3[   n3[0] ] }}</li>
+                        {% endif %}
 
                               {% if n3.append(n3.pop() + 1) %}{% endif %}
 
@@ -148,15 +161,16 @@
                                   {% set tempn4 = loop.index -1  %}
                                   <ul class = "c3{{n3[0] -1}}" style= "display : none" >
                                       {% for m in range( cate[tempn1][tempn2][tempn3][  tempn4]| length )%}
-                                          <li class="list-group-item list-group-item-danger">    {{cate[tempn1][tempn2][tempn3][tempn4][  loop.index -1 ] }} </li>
+                                          <li class="list-group-item ">    {{cate[tempn1][tempn2][tempn3][tempn4][  loop.index -1 ] }} </li>
                                       {% endfor %}
                                   </ul>
                               {% endfor %}
                           </li>
+
                       </ul>
                       {% endfor %}
 
-
+<!-- list-group-item-danger -->
 
                   </ul>
                   {% endfor %}
