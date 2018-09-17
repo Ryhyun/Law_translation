@@ -52,6 +52,7 @@
     <div id="civil" class="w3-container w3-white w3-padding-16 myLink">
       <h3> 민법 </h3>
       <h3>  필요한 조문을 검색해 줍니다 </h3>
+      <h6> ex) "집주인이 월세 보증금을 안줘요", "동생이 부모님 재산을 훔쳐갔어요"을 검색해 보세요. </h6>
         <form method ="POST", action="/civil" >
       <div class="w3-row-padding" style="margin:0 -16px;">
 
@@ -187,57 +188,19 @@
     </div>
   {% endif %}
 
-    <!-- Image -->
-  <div class="w3-row-padding w3-text-white w3-large">
-    <div class="w3-half w3-margin-bottom">
-      <div class="w3-display-container">
-        <img src="{{ url_for('static', filename= 'images/justice.png') }}" alt="부동산" style="width:100%">
-        <span class="w3-display-bottomleft w3-padding">부동산</span>
-      </div>
-    </div>
-    <div class="w3-half">
-      <div class="w3-row-padding" style="margin:0 -16px">
 
-        <div class="w3-half w3-margin-bottom">
-          <div class="w3-display-container">
-            <img src="{{ url_for('static', filename= 'images/justice.png') }}" alt="부동산" style="width:100%">
-            <span class="w3-display-bottomleft w3-padding">부동산</span>
-          </div>
-        </div>
-        <div class="w3-half w3-margin-bottom">
-          <div class="w3-display-container">
-            <img src="{{ url_for('static', filename= 'images/justice.png') }}" alt="부동산" style="width:100%">
-            <span class="w3-display-bottomleft w3-padding">부동산</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <br>
+  <br>
 
-  <!-- Newsletter -->
-  <div class="w3-container">
-    <div class="w3-panel w3-padding-16 w3-black w3-opacity w3-card w3-hover-opacity-off">
-      <h2>Get the best offers first!</h2>
-      <p>Join our newsletter.</p>
-      <label>E-mail</label>
-      <input class="w3-input w3-border" type="text" placeholder="Your Email address">
-      <button type="button" class="w3-button w3-red w3-margin-top">Subscribe</button>
-    </div>
-  </div>
 
   <!-- Contact -->
   <div class="w3-container">
     <h2>Contact</h2>
     <p>Let us book your next trip!</p>
-    <i class="fa fa-map-marker" style="width:30px"></i> Chicago, US<br>
-    <i class="fa fa-phone" style="width:30px"></i> Phone: +00 151515<br>
-    <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message" required name="Message"></p>
-      <p><button class="w3-button w3-black w3-padding-large" type="submit">SEND MESSAGE</button></p>
-    </form>
+    <i class="fa fa-map-marker" style="width:30px"></i> Busan, Korean<br>
+    <i class="fa fa-phone" style="width:30px"></i> Phone: +82)010-1234-5678<br>
+    <i class="fa fa-envelope" style="width:30px"> </i> Email: law-searcher@gmail.com<br>
+
   </div>
 
 <!-- End page content -->
