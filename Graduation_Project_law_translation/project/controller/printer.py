@@ -51,16 +51,20 @@ def civil():
             else:
                 tempArr[ int(cluster[i])] += 1
     strResult = '    "' + str(input) + '" 분석하면   '
-    aResult = ""
+
     cnt = 0
 
     indArr = []
+    aResult = []
+    dictResult = {}
     for i in range(20):
         if( tempArr[i] != 0 ):
             cnt += tempArr[i]
             indArr.append(i)
-            aResult = aResult + " " +  detail[i]+"일 확률:" + str(float("{:.2f}".format(tempArr[i] / totalC))* 100 ) + "% "
+            dictResult[i]= tempArr[i];
 
+    for y,v in sorted( dictResult.items(), key= lambda x: x[1],reverse=True ):
+        aResult.append(detail[y] + "일 확률:" + str(float("{:.2f}".format(tempArr[y] / totalC)) * 100) + "% ")
 
     if cnt == 0 :
         strResult = '    "' + str(input) + '" 학습 중 입니다~'

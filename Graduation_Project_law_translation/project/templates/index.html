@@ -111,7 +111,11 @@
             <span class="close-button">&times;</span>
 
           <p> {{ strResult}} </p>
-          <p style ="font-size: 35px; "> {{ aResult }} </p>
+            {% for result in aResult %}
+          <p style ="font-size: 35px; ">
+            {{ result}}
+          </p>
+            {% endfor %}
           <table class="table table-sm">
             <thead>
             </thead>
