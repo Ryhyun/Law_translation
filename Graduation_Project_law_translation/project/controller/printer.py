@@ -60,11 +60,10 @@ def civil():
     for i in range(20):
         if( tempArr[i] != 0 ):
             cnt += tempArr[i]
-
             dictResult[i]= tempArr[i];
 
     for y,v in sorted( dictResult.items(), key= lambda x: x[1],reverse=True ):
-        aResult.append(detail[y] + "일 확률:" + str(float("{:.2f}".format(tempArr[y] / totalC)) * 100) + "% ")
+        aResult.append(detail[y] + "일 확률:" + str(round(float("{:.2f}".format(tempArr[y] / totalC)) * 100),2) + "% ")
         indArr.append(y)
 
     if cnt == 0 :
